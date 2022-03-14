@@ -4,7 +4,8 @@ module affinityCalculates
   class CalculatorService
     class NotFoundError < StandardError; end
 
-    IVA = 0.19
+    #JOP = job offer percentage
+    JOP = 0.1
     attr_reader :person, :params
 
     def initialize(person, params)
@@ -19,7 +20,7 @@ module affinityCalculates
 
     def excute!
       person.baseDates = affinity_calculate(params[:city_id][:contract_type_id].to_f)
-      person.iva = person.baseDates * IVA
+      person.iva = person.baseDates * JOP
       person.total_premium = person.baseDates + person.iva
       person.contract_type_id = params[:city_id][:contract_type_id]
       person.job_categories = params[:city_id][:job_categories]
